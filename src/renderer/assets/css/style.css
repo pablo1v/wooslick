@@ -1,0 +1,76 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  height: 44px;
+  padding: 6px 10px;
+
+  align-items: center;
+
+  background-color: #fff;
+  border-bottom: 1px solid #dfe1e5;
+}
+
+.header .buttons {
+  display: flex;
+  margin-right: 10px;
+}
+
+.header .buttons button + button {
+  margin-left: 4px;
+}
+
+.header .buttons button {
+  display: flex;
+  width: 30px;
+  height: 30px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px;
+  border-radius: 50%;
+}
+
+.header .buttons button[disabled='true'] {
+  cursor: default;
+  opacity: 0.3;
+  background-color: transparent !important;
+}
+
+.header .buttons button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.header .buttons button img {
+  width: 14px;
+  height: 14px;
+  max-width: 100%;
+}
+
+.header form,
+.header form input {
+  width: 100%;
+}
+
+.header form input {
+  padding: 6px 14px;
+  border-radius: 999px;
+
+  color: #000;
+  background-color: #f1f3f4;
+}
+
+.header form input::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
