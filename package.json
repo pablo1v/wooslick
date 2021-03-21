@@ -1,0 +1,51 @@
+{
+  "name": "hi-browser",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "src/main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron-forge start",
+    "make": "electron-forge make",
+    "package": "electron-forge package",
+    "lint": "eslint ./ --ext js,ts",
+    "lint:fix": "eslint ./ --ext js,ts --fix",
+    "prettier": "prettier --check ./**/*.{js,ts}",
+    "prettier:fix": "prettier --write ./**/*.{js,ts}"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pablo1v/hi-browser.git"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@electron/remote": "^1.0.4",
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/eslint-parser": "^7.13.10",
+    "@babel/plugin-syntax-class-properties": "^7.12.13",
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "@hitechline/eslint-config": "^2.0.0",
+    "electron": "^12.0.1",
+    "eslint": "7.22.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "8.1.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-import-helpers": "1.1.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "2.2.1",
+    "rimraf": "3.0.2"
+  }
+}
