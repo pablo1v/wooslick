@@ -4,8 +4,8 @@ const { WindowManager } = require('../managers/WindowManager');
 const { isInEmptyURL } = require('../utils/isInEmptyURL');
 const { Take } = require('./Take');
 
-const CANCEL_ICON_PATH = 'assets/img/cancel.svg';
-const REFRESH_ICON_PATH = 'assets/img/refresh.svg';
+const CANCEL_ICON_PATH = 'public/img/cancel.svg';
+const REFRESH_ICON_PATH = 'public/img/refresh.svg';
 
 class Buttons extends Take {
   /**
