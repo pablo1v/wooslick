@@ -1,22 +1,21 @@
 const { nativeImage, BrowserWindow } = require('electron');
 
-const { makePathFromPublicRoot } = require('../utils/makePathFromPublicRoot');
+const { makeRendererPath } = require('../../utils/makeRendererPath');
 const { createBrowserView } = require('./createBrowserView');
 const { setInSlot, getFromSlot } = require('./slot');
-const { join, resolve } = require('path');
-
-const image = nativeImage.createFromPath(makePathFromPublicRoot('icon.png'));
+const { join } = require('path');
 
 const HEADER_HEIGHT = 44;
 
+const icon = nativeImage.createFromPath(join(__static, 'icon.png'));
+
 function buildWindow() {
   const browserWindow = new BrowserWindow({
+    icon,
     show: false,
-    icon: image,
     useContentSize: true,
     webPreferences: {
       contextIsolation: true,
-      preload: join(__dirname, 'preload.js'),
     },
   });
 
@@ -29,7 +28,7 @@ function buildWindow() {
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
-      preload: resolve(__dirname, '..', 'renderer', 'lib', 'preload.js'),
+      preload: makeRendererPath('lib', 'preload.js'),
     },
   });
 
@@ -48,7 +47,7 @@ function buildWindow() {
 
   // Load header element
   header.webContents
-    .loadFile(resolve(__dirname, '..', 'renderer', 'header.html'))
+    .loadURL(`file://${makeRendererPath('header.html')}`)
     .then(() => {
       browserWindow.maximize();
       browserWindow.show();
@@ -57,7 +56,7 @@ function buildWindow() {
 
       setImmediate(() => {
         content.webContents
-          .loadFile(resolve(__dirname, '..', 'renderer', 'empty.html'))
+          .loadURL(`file://${makeRendererPath('empty.html')}`)
           .then(() => {
             content.webContents.openDevTools({
               mode: 'right',
