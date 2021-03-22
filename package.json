@@ -2,16 +2,23 @@
   "name": "hi-browser",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "src/main.js",
+  "main": "src/main/main.js",
   "private": true,
   "scripts": {
-    "start": "electron-forge start",
-    "make": "electron-forge make",
-    "package": "electron-forge package",
+    "dev": "electron-webpack dev",
+    "minify": "electron-webpack",
+    "build": "yarn electron-builder",
+    "build:minify": "yarn minify && yarn electron-builder",
+    "electron-builder": "electron-builder -c electron-builder.config.js",
+    "postinstall": "electron-builder install-app-deps",
     "lint": "eslint ./ --ext js,ts",
     "lint:fix": "eslint ./ --ext js,ts --fix",
     "prettier": "prettier --check ./**/*.{js,ts}",
     "prettier:fix": "prettier --write ./**/*.{js,ts}"
+  },
+  "author": {
+    "name": "Pablo Vinícius",
+    "email": "dev.pablo.vinicius@gmail.com"
   },
   "repository": {
     "type": "git",
@@ -21,20 +28,17 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@electron/remote": "1.0.4",
-    "electron-squirrel-startup": "1.0.0"
+    "@electron/remote": "1.0.4"
   },
   "devDependencies": {
     "@babel/core": "7.13.10",
     "@babel/eslint-parser": "7.13.10",
     "@babel/plugin-syntax-class-properties": "7.12.13",
-    "@electron-forge/cli": "6.0.0-beta.54",
-    "@electron-forge/maker-deb": "6.0.0-beta.54",
-    "@electron-forge/maker-rpm": "6.0.0-beta.54",
-    "@electron-forge/maker-squirrel": "6.0.0-beta.54",
-    "@electron-forge/maker-zip": "6.0.0-beta.54",
     "@hitechline/eslint-config": "2.0.0",
     "electron": "12.0.1",
+    "electron-builder": "^22.10.5",
+    "electron-packager": "^15.2.0",
+    "electron-webpack": "^2.8.2",
     "eslint": "7.22.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-airbnb-base": "14.2.1",
@@ -46,6 +50,7 @@
     "eslint-plugin-react": "7.22.0",
     "eslint-plugin-react-hooks": "4.2.0",
     "prettier": "2.2.1",
-    "rimraf": "3.0.2"
+    "rimraf": "3.0.2",
+    "webpack": "4.x.x"
   }
 }
