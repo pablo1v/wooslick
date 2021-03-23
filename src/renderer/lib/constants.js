@@ -1,9 +1,9 @@
 const { resolve } = require('path');
 
-const HTML_EMPTY_FILE = resolve(__dirname, '..', 'empty.html');
-const HTML_EMPTY_FILE_URL = `file://${HTML_EMPTY_FILE}`;
+const HTML_WELCOME_FILE = resolve(__dirname, '..', 'welcome.html');
+const HTML_WELCOME_FILE_URL = `file://${HTML_WELCOME_FILE}`;
 
 module.exports = {
-  HTML_EMPTY_FILE,
-  HTML_EMPTY_FILE_URL,
+  HTML_WELCOME_FILE,
+  HTML_WELCOME_FILE_URL,
 };

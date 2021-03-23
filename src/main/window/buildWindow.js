@@ -56,7 +56,7 @@ function buildWindow() {
 
       setImmediate(() => {
         content.webContents
-          .loadURL(`file://${makeRendererPath('empty.html')}`)
+          .loadURL(`file://${makeRendererPath('welcome.html')}`)
           .then(() => {
             content.webContents.openDevTools({
               mode: 'right',

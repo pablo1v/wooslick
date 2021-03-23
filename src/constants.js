@@ -1,4 +1,4 @@
-const APP_NAME = 'HiBrowser';
+const APP_NAME = 'Hi Browser';
 
 module.exports = {
   APP_NAME,

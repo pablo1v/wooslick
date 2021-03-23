@@ -1,7 +1,7 @@
 const { APP_NAME } = require('../../../constants');
 const { ElementManager } = require('../managers/ElementManager');
 const { WindowManager } = require('../managers/WindowManager');
-const { isInEmptyURL } = require('../utils/isInEmptyURL');
+const { isInWelcomeURL } = require('../utils/isInWelcomeURL');
 const { Take } = require('./Take');
 
 class Page extends Take {
@@ -32,7 +32,7 @@ class Page extends Take {
       let url = contentWebContents.getURL();
       let title = contentWebContents.getTitle();
 
-      if (isInEmptyURL(url)) {
+      if (isInWelcomeURL(url)) {
         url = '';
         title = APP_NAME;
       }

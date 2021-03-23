@@ -1,7 +1,7 @@
-const { HTML_EMPTY_FILE_URL } = require('../constants');
+const { HTML_WELCOME_FILE_URL } = require('../constants');
 const { ElementManager } = require('../managers/ElementManager');
 const { WindowManager } = require('../managers/WindowManager');
-const { isInEmptyURL } = require('../utils/isInEmptyURL');
+const { isInWelcomeURL } = require('../utils/isInWelcomeURL');
 const { Take } = require('./Take');
 
 const CANCEL_ICON_PATH = 'public/img/cancel.svg';
@@ -55,7 +55,7 @@ class Buttons extends Take {
         return;
       }
 
-      if (isInEmptyURL(contentWebContents.getURL())) {
+      if (isInWelcomeURL(contentWebContents.getURL())) {
         contentWebContents.goToIndex(0);
         return;
       }
@@ -66,14 +66,14 @@ class Buttons extends Take {
     /* */
 
     const handleLoadEffects = (force = false) => {
-      if (force && isInEmptyURL(this.lastPageURL)) {
+      if (force && isInWelcomeURL(this.lastPageURL)) {
         nextButton.setAttribute('disabled', true);
         return;
       }
 
       if (
-        isInEmptyURL(contentWebContents.getURL()) ||
-        (contentWebContents.canGoForward() && !isInEmptyURL(this.lastPageURL))
+        isInWelcomeURL(contentWebContents.getURL()) ||
+        (contentWebContents.canGoForward() && !isInWelcomeURL(this.lastPageURL))
       ) {
         nextButton.removeAttribute('disabled');
         return;
@@ -101,7 +101,7 @@ class Buttons extends Take {
       }
 
       previousButton.setAttribute('disabled', true);
-      contentWebContents.loadURL(HTML_EMPTY_FILE_URL).catch(() => {
+      contentWebContents.loadURL(HTML_WELCOME_FILE_URL).catch(() => {
         // noop
       });
     });
@@ -113,7 +113,7 @@ class Buttons extends Take {
     });
 
     contentWebContents.addListener('did-stop-loading', () => {
-      if (isInEmptyURL(contentWebContents.getURL())) {
+      if (isInWelcomeURL(contentWebContents.getURL())) {
         previousButton.setAttribute('disabled', true);
       }
     });
