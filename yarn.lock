@@ -930,10 +930,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@hitechline/eslint-config@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@hitechline/eslint-config/-/eslint-config-2.0.0.tgz#bfb753f5446b041621589c86b6b03dde2196a95e"
-  integrity sha512-RiVvcoHmfPr+9v/t/YEKcaQVNujUJQjgo4gPgr3EanTqJJ9DWGkDSIIvcwK6UmKjCaTDdrhCSbrR0mx+X1eXDg==
+"@hitechline/eslint-config@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@hitechline/eslint-config/-/eslint-config-2.0.1.tgz#c624c3ba746156c287021ea0a9dd4572a3741041"
+  integrity sha512-L2N0WVwKYthBWn8IFmtCzqIb4mTxTfSzOqf3issNDr+dK3o2q+qMeMpPReIKuQSPtukBblM9WYxnS+0YD1yTjA==
 
 "@malept/cross-spawn-promise@^1.1.0":
   version "1.1.1"
