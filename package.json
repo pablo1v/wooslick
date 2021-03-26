@@ -31,7 +31,7 @@
     "@electron/remote": "1.0.4"
   },
   "devDependencies": {
-    "@babel/core": "7.13.10",
+    "@babel/core": "7.13.13",
     "@babel/eslint-parser": "7.13.10",
     "@babel/plugin-syntax-class-properties": "7.12.13",
     "@hitechline/eslint-config": "2.0.1",
