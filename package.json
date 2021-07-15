@@ -35,7 +35,7 @@
     "@babel/eslint-parser": "7.14.7",
     "@babel/plugin-syntax-class-properties": "7.12.13",
     "@hitechline/eslint-config": "2.0.2",
-    "electron": "12.0.2",
+    "electron": "13.1.7",
     "electron-builder": "22.10.5",
     "electron-packager": "15.2.0",
     "electron-webpack": "2.8.2",
