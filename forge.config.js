@@ -2,10 +2,10 @@ const { join } = require('path');
 
 module.exports = {
   packagerConfig: {
-    name: 'Hi Browser',
+    name: 'Wooslick',
     icon: join(__dirname, 'resources', 'icon'),
-    executableName: 'hi-browser',
-    appBundleId: 'com.pablo1v.hi-browser',
+    executableName: 'wooslick',
+    appBundleId: 'com.pablo1v.wooslick',
     extraResource: ['resources'],
   },
   makers: [

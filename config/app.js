@@ -1,3 +1,3 @@
 module.exports = {
-  AppName: 'Hi Browser',
+  AppName: 'Wooslick',
 };
