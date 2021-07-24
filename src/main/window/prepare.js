@@ -1,11 +1,7 @@
-const { app } = require('electron');
+import { app } from 'electron';
 
-const { APP_NAME } = require('../../constants');
+import { AppName } from '../../../config/app';
 
-async function prepare() {
-  app.setName(APP_NAME);
+export async function prepare() {
+  app.setName(AppName);
 }
-
-module.exports = {
-  prepare,
-};

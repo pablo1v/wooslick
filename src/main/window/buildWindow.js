@@ -1,15 +1,16 @@
-const { nativeImage, BrowserWindow } = require('electron');
+import { join } from 'path';
 
-const { makeRendererPath } = require('../../utils/makeRendererPath');
-const { createBrowserView } = require('./createBrowserView');
-const { setInSlot, getFromSlot } = require('./slot');
-const { join } = require('path');
+import { nativeImage, BrowserWindow } from 'electron';
+
+import { RESOURCES_PATH } from '../../constants/paths';
+import { createBrowserView } from './createBrowserView';
+import { setInSlot, getFromSlot } from './slot';
 
 const HEADER_HEIGHT = 44;
 
-const icon = nativeImage.createFromPath(join(__static, 'icon.png'));
+const icon = nativeImage.createFromPath(join(RESOURCES_PATH, 'icon.png'));
 
-function buildWindow() {
+export function buildWindow() {
   const browserWindow = new BrowserWindow({
     icon,
     show: false,
@@ -26,9 +27,8 @@ function buildWindow() {
       height: HEADER_HEIGHT,
     },
     webPreferences: {
-      nodeIntegration: true,
       enableRemoteModule: true,
-      preload: makeRendererPath('lib', 'preload.js'),
+      preload: HEADER_PRELOAD_WEBPACK_ENTRY,
     },
   });
 
@@ -46,24 +46,24 @@ function buildWindow() {
   browserWindow.addBrowserView(content);
 
   // Load header element
-  header.webContents
-    .loadURL(`file://${makeRendererPath('header.html')}`)
-    .then(() => {
-      browserWindow.maximize();
-      browserWindow.show();
+  header.webContents.loadURL(HEADER_WEBPACK_ENTRY).then(() => {
+    browserWindow.maximize();
+    browserWindow.show();
 
-      resizeContent();
+    resizeContent();
 
-      setImmediate(() => {
-        content.webContents
-          .loadURL(`file://${makeRendererPath('welcome.html')}`)
-          .then(() => {
-            content.webContents.openDevTools({
-              mode: 'right',
-            });
-          });
+    header.webContents.openDevTools({
+      mode: 'undocked',
+    });
+
+    setImmediate(() => {
+      content.webContents.loadURL(VIEW_WEBPACK_ENTRY).then(() => {
+        content.webContents.openDevTools({
+          mode: 'right',
+        });
       });
     });
+  });
 
   // Listen window resize
   browserWindow.on('resize', () => {
@@ -127,7 +127,3 @@ function resizeContent() {
     }
   }, 500);
 }
-
-module.exports = {
-  buildWindow,
-};

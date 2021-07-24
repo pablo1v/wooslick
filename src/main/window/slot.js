@@ -8,14 +8,14 @@
  */
 const PRIVATE_SLOT = new Map();
 
-function getPrivateSlot() {
+export function getPrivateSlot() {
   return PRIVATE_SLOT;
 }
 
 /**
  * @param {SlotKeyType} key
  */
-function getFromSlot(key) {
+export function getFromSlot(key) {
   return PRIVATE_SLOT.get(key);
 }
 
@@ -23,12 +23,6 @@ function getFromSlot(key) {
  * @param {SlotKeyType} key
  * @param {any} value
  */
-function setInSlot(key, value) {
+export function setInSlot(key, value) {
   PRIVATE_SLOT.set(key, value);
 }
-
-module.exports = {
-  setInSlot,
-  getFromSlot,
-  getPrivateSlot,
-};

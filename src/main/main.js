@@ -1,9 +1,9 @@
+import { app, Menu, BrowserWindow } from 'electron';
+
+import { buildWindow } from './window/buildWindow';
+import { prepare } from './window/prepare';
+
 require('@electron/remote/main').initialize();
-
-const { app, Menu, BrowserWindow } = require('electron');
-
-const { buildWindow } = require('./window/buildWindow');
-const { prepare } = require('./window/prepare');
 
 app.whenReady().then(() => {
   createWindow();

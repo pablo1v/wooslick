@@ -1,10 +1,10 @@
-const { ElementManager } = require('../managers/ElementManager');
-const { Page } = require('./Page');
-const { Take } = require('./Take');
+import { ElementManager } from '../managers/ElementManager';
+import { Page } from './Page';
+import { Take } from './Take';
 
 const URL_REGEX = /^(https|http):\/\/[^\s$.?#].[^\s]*$/;
 
-class Form extends Take {
+export class Form extends Take {
   load() {
     const form = ElementManager.get('form');
 
@@ -33,7 +33,3 @@ class Form extends Take {
     page.render(url);
   }
 }
-
-module.exports = {
-  Form,
-};

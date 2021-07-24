@@ -1,4 +1,4 @@
-const { BrowserView } = require('electron');
+import { BrowserView } from 'electron';
 
 const DEFAULT_AUTO_RESIZE_OPTIONS = { width: true };
 const DEFAULT_BOUNDS_OPTIONS = { x: 0, y: 0, width: 0, height: 0 };
@@ -19,7 +19,7 @@ const DEFAULT_BOUNDS_OPTIONS = { x: 0, y: 0, width: 0, height: 0 };
  * }} options
  * @returns {BrowserView & CustomBrowserView}
  */
-function createBrowserView(name, options = {}) {
+export function createBrowserView(name, options = {}) {
   const { fullResizable, bounds, webPreferences = {} } = options;
   const autoResizeOptions = {};
 
@@ -47,7 +47,3 @@ function createBrowserView(name, options = {}) {
 
   return browserWindow;
 }
-
-module.exports = {
-  createBrowserView,
-};

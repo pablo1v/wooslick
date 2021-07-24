@@ -1,7 +1,7 @@
 /**
  * @abstract
  */
-class Take {
+export class Take {
   /**
    * @abstract
    */
@@ -31,7 +31,3 @@ class Take {
     return this.cache;
   }
 }
-
-module.exports = {
-  Take,
-};

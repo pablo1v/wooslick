@@ -12,7 +12,7 @@ const ELEMENT_NAMES_OBJECT = {
 
 const ELEMENT_NAMES_MAP = Object.keys(ELEMENT_NAMES_OBJECT);
 
-class ElementManager {
+export class ElementManager {
   /**
    * @type {Map<string, HTMLElement>}
    */
@@ -115,7 +115,3 @@ class ElementManager {
     }
   }
 }
-
-module.exports = {
-  ElementManager,
-};

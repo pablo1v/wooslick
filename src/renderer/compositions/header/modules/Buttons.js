@@ -1,13 +1,13 @@
-const { HTML_WELCOME_FILE_URL } = require('../constants');
-const { ElementManager } = require('../managers/ElementManager');
-const { WindowManager } = require('../managers/WindowManager');
-const { isInWelcomeURL } = require('../utils/isInWelcomeURL');
-const { Take } = require('./Take');
+import {
+  VIEW_PAGE_URL,
+  CANCEL_ICON_PATH,
+  REFRESH_ICON_PATH,
+} from '../constants';
+import { ElementManager } from '../managers/ElementManager';
+import { isInIdlePage } from '../utils/isInIdlePage';
+import { Take } from './Take';
 
-const CANCEL_ICON_PATH = 'public/img/cancel.svg';
-const REFRESH_ICON_PATH = 'public/img/refresh.svg';
-
-class Buttons extends Take {
+export class Buttons extends Take {
   /**
    * @type {Map<number, string>}
    */
@@ -33,19 +33,24 @@ class Buttons extends Take {
   }
 
   #listenPageChange() {
-    const contentWebContents = WindowManager.getView('content').webContents;
-
-    contentWebContents.addListener('did-start-navigation', (_event, url) => {
-      if (url) {
-        this.#pageURLStore.set(this.#pageURLStore.size, url);
-        contentWebContents.emit('received-navigation');
-      }
-    });
+    window.manager.addViewWebContentsListener(
+      'content',
+      'did-start-navigation',
+      (_event, url) => {
+        if (url) {
+          this.#pageURLStore.set(this.#pageURLStore.size, url);
+          window.manager.emitViewWebContentsListener(
+            'content',
+            'received-navigation',
+          );
+        }
+      },
+    );
   }
 
   #registerNext() {
     const nextButton = this.#getButton('next');
-    const contentWebContents = WindowManager.getView('content').webContents;
+    const contentWebContents = window.manager.getViewWebContents('content');
 
     nextButton.setAttribute('disabled', true);
 
@@ -55,7 +60,7 @@ class Buttons extends Take {
         return;
       }
 
-      if (isInWelcomeURL(contentWebContents.getURL())) {
+      if (isInIdlePage(contentWebContents.getURL())) {
         contentWebContents.goToIndex(0);
         return;
       }
@@ -66,14 +71,14 @@ class Buttons extends Take {
     /* */
 
     const handleLoadEffects = (force = false) => {
-      if (force && isInWelcomeURL(this.lastPageURL)) {
+      if (force && isInIdlePage(this.lastPageURL)) {
         nextButton.setAttribute('disabled', true);
         return;
       }
 
       if (
-        isInWelcomeURL(contentWebContents.getURL()) ||
-        (contentWebContents.canGoForward() && !isInWelcomeURL(this.lastPageURL))
+        isInIdlePage(contentWebContents.getURL()) ||
+        (contentWebContents.canGoForward() && !isInIdlePage(this.lastPageURL))
       ) {
         nextButton.removeAttribute('disabled');
         return;
@@ -82,15 +87,23 @@ class Buttons extends Take {
       nextButton.setAttribute('disabled', true);
     };
 
-    contentWebContents.addListener('did-stop-loading', handleLoadEffects);
-    contentWebContents.addListener('received-navigation', () => {
-      handleLoadEffects(true);
-    });
+    window.manager.addViewWebContentsListener(
+      'content',
+      'did-stop-loading',
+      handleLoadEffects,
+    );
+    window.manager.addViewWebContentsListener(
+      'content',
+      'received-navigation',
+      () => {
+        handleLoadEffects(true);
+      },
+    );
   }
 
   #registerPrevious() {
     const previousButton = this.#getButton('previous');
-    const contentWebContents = WindowManager.getView('content').webContents;
+    const contentWebContents = window.manager.getViewWebContents('content');
 
     previousButton.setAttribute('disabled', true);
 
@@ -101,27 +114,35 @@ class Buttons extends Take {
       }
 
       previousButton.setAttribute('disabled', true);
-      contentWebContents.loadURL(HTML_WELCOME_FILE_URL).catch(() => {
+      contentWebContents.loadURL(VIEW_PAGE_URL).catch(() => {
         // noop
       });
     });
 
     /* */
 
-    contentWebContents.addListener('did-start-loading', () => {
-      previousButton.removeAttribute('disabled');
-    });
+    window.manager.addViewWebContentsListener(
+      'content',
+      'did-start-loading',
+      () => {
+        previousButton.removeAttribute('disabled');
+      },
+    );
 
-    contentWebContents.addListener('did-stop-loading', () => {
-      if (isInWelcomeURL(contentWebContents.getURL())) {
-        previousButton.setAttribute('disabled', true);
-      }
-    });
+    window.manager.addViewWebContentsListener(
+      'content',
+      'did-stop-loading',
+      () => {
+        if (isInIdlePage(contentWebContents.getURL())) {
+          previousButton.setAttribute('disabled', true);
+        }
+      },
+    );
   }
 
   #registerRefresh() {
     const refreshButton = this.#getButton('refresh');
-    const contentWebContents = WindowManager.getView('content').webContents;
+    const contentWebContents = window.manager.getViewWebContents('content');
 
     const mutationObserver = new MutationObserver(event => {
       if (
@@ -156,6 +177,10 @@ class Buttons extends Take {
     /* */
 
     refreshButton.addEventListener('click', () => {
+      if (isInIdlePage(contentWebContents.getURL())) {
+        return;
+      }
+
       if (refreshButton.classList.contains('refreshing')) {
         contentWebContents.stop();
         return;
@@ -166,16 +191,20 @@ class Buttons extends Take {
 
     /* */
 
-    contentWebContents.addListener('did-stop-loading', () => {
-      refreshButton.classList.remove('refreshing');
-    });
+    window.manager.addViewWebContentsListener(
+      'content',
+      'did-stop-loading',
+      () => {
+        refreshButton.classList.remove('refreshing');
+      },
+    );
 
-    contentWebContents.addListener('did-start-loading', () => {
-      refreshButton.classList.add('refreshing');
-    });
+    window.manager.addViewWebContentsListener(
+      'content',
+      'did-start-loading',
+      () => {
+        refreshButton.classList.add('refreshing');
+      },
+    );
   }
 }
-
-module.exports = {
-  Buttons,
-};
