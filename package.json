@@ -31,7 +31,7 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@electron/remote": "1.1.0"
+    "@electron/remote": "1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
@@ -48,9 +48,9 @@
     "babel-loader": "^8.2.2",
     "chalk": "^4.1.1",
     "chokidar": "^3.5.2",
-    "electron": "12.0.2",
+    "electron": "13.1.7",
     "esbuild": "^0.12.15",
-    "eslint": "7.29.0",
+    "eslint": "7.31.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-config-prettier": "8.3.0",
