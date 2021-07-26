@@ -35,8 +35,6 @@ async function buildRenderer() {
         mergeOptions({
           entryPoints: [startFile],
           outfile: join(compositionOutPath, 'start.js'),
-          bundle: true,
-          minify: true,
         }),
       );
     }
@@ -46,8 +44,6 @@ async function buildRenderer() {
         mergeOptions({
           entryPoints: [preloadFile],
           outfile: join(compositionOutPath, 'preload.js'),
-          bundle: true,
-          minify: true,
         }),
       );
     }

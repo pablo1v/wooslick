@@ -29,9 +29,11 @@ const ESBUILD_BASE_OPTIONS = {
   target: 'es2015',
   platform: 'node',
   absWorkingDir: ROOT_PATH,
+  bundle: true,
+  minify: !IS_DEV,
   metafile: true,
-  external: [...APP_EXTERNAL_PACKAGES],
   sourcemap: IS_DEV,
+  external: [...APP_EXTERNAL_PACKAGES],
 };
 
 module.exports = {

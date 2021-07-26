@@ -14,9 +14,6 @@ async function buildMain() {
     mergeOptions({
       entryPoints: [MAIN_FILE],
       outfile: 'dist/main.js',
-      bundle: true,
-      minify: true,
-      watch: true,
     }),
   );
 
