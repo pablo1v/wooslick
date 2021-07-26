@@ -1,16 +1,16 @@
+import { readFileSync } from 'fs';
 import { join } from 'path';
 
 import { nativeImage, BrowserWindow } from 'electron';
 
 import { RESOURCES_PATH } from '../../constants/paths';
+import { HEADER_HEIGHT } from '../../constants/window';
 import { createBrowserView } from './createBrowserView';
 import { setInSlot, getFromSlot } from './slot';
 
-const HEADER_HEIGHT = 44;
-
 const icon = nativeImage.createFromPath(join(RESOURCES_PATH, 'icon.png'));
 
-export function buildWindow() {
+export async function buildWindow() {
   const browserWindow = new BrowserWindow({
     icon,
     show: false,
@@ -27,8 +27,9 @@ export function buildWindow() {
       height: HEADER_HEIGHT,
     },
     webPreferences: {
+      nodeIntegration: true,
       enableRemoteModule: true,
-      preload: HEADER_PRELOAD_WEBPACK_ENTRY,
+      preload: join(__dirname, 'renderer', 'header', 'preload.js'),
     },
   });
 
@@ -45,30 +46,30 @@ export function buildWindow() {
   browserWindow.addBrowserView(header);
   browserWindow.addBrowserView(content);
 
-  // Load header element
-  header.webContents.loadURL(HEADER_WEBPACK_ENTRY).then(() => {
-    browserWindow.maximize();
-    browserWindow.show();
-
-    resizeContent();
-
-    header.webContents.openDevTools({
-      mode: 'undocked',
-    });
-
-    setImmediate(() => {
-      content.webContents.loadURL(VIEW_WEBPACK_ENTRY).then(() => {
-        content.webContents.openDevTools({
-          mode: 'right',
-        });
-      });
-    });
-  });
-
   // Listen window resize
   browserWindow.on('resize', () => {
     resizeContent();
   });
+
+  // Load header element
+  await header.webContents.loadFile(join(__dirname, 'renderer', 'header.html'));
+  await header.webContents.executeJavaScript(
+    readFileSync(join(__dirname, 'renderer', 'header', 'start.js'), {
+      encoding: 'utf-8',
+    }),
+  );
+
+  header.webContents.openDevTools({
+    mode: 'undocked',
+  });
+
+  browserWindow.maximize();
+  browserWindow.show();
+
+  resizeContent();
+
+  await content.webContents.loadFile(join(__dirname, 'renderer', 'view.html'));
+  content.webContents.openDevTools({ mode: 'right' });
 }
 
 // https://github.com/electron/electron/issues/13468#issuecomment-503358188
