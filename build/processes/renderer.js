@@ -17,7 +17,7 @@ const COMPOSITION_DIRECTORY_REPLACE_REGEX = new RegExp(
 );
 
 /**
- * Run renderer process
+ * Build renderer process
  */
 async function buildRenderer() {
   for await (const compositionDirectory of RENDERER_COMPOSITIONS) {
