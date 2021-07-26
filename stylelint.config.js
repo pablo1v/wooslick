@@ -36,12 +36,17 @@ module.exports = {
     'selector-max-id': 0,
     'selector-class-pattern': '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$',
     'selector-attribute-quotes': 'always',
-    'selector-no-qualifying-type': true,
     'selector-combinator-space-after': 'always',
     'selector-pseudo-element-colon-notation': 'double',
     'selector-attribute-operator-space-after': 'never',
     'selector-attribute-operator-space-before': 'never',
     'selector-attribute-brackets-space-inside': 'never',
     'selector-pseudo-class-parentheses-space-inside': 'never',
+    'selector-no-qualifying-type': [
+      true,
+      {
+        ignore: ['attribute'],
+      },
+    ],
   },
 };

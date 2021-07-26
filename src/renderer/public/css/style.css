@@ -1,5 +1,5 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 .container {
@@ -17,7 +17,7 @@ body {
 
   align-items: center;
 
-  background-color: #fff;
+  background-color: #ffffff;
   border-bottom: 1px solid #dfe1e5;
 }
 
@@ -42,7 +42,7 @@ body {
   border-radius: 50%;
 }
 
-.header .buttons button[disabled='true'] {
+.header .buttons button[disabled] {
   cursor: default;
   opacity: 0.3;
   background-color: transparent !important;
@@ -67,7 +67,7 @@ body {
   padding: 6px 14px;
   border-radius: 999px;
 
-  color: #000;
+  color: #000000;
   background-color: #f1f3f4;
 }
 
