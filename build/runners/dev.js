@@ -13,7 +13,7 @@ const { ChildProcess } = require('./dev/ChildProcess');
 
 const MAIN_FILES_REGEX = /^src\/main\/.+/;
 const RENDERER_FILES_REGEX = /^src\/renderer\/.+/;
-const STATIC_FILES_REGEX = /^src\/renderer\/(public\/.+|([\w]+)\.html$)/;
+const STATIC_FILES_REGEX = /^src\/renderer\/(public\/.+|([\w.-]+)\.html$)/;
 
 async function dev() {
   clearConsole();
