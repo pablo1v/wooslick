@@ -1,12 +1,25 @@
-const { join } = require('path');
-
 module.exports = {
   packagerConfig: {
-    name: 'Wooslick',
-    icon: join(__dirname, 'resources', 'icon'),
+    name: 'Wooslick Browser',
+    icon: 'resources/icon',
     executableName: 'wooslick',
     appBundleId: 'com.pablo1v.wooslick',
     extraResource: ['resources'],
+    asar: true,
+    ignore: [
+      '.github',
+      '.vscode',
+      'build',
+      'config',
+      '.yarnrc',
+      '.gitignore',
+      '.eslintrc.js',
+      '.editorconfig',
+      '.eslintignore',
+      '.prettierignore',
+      'yarn.lock',
+      'renovate.json',
+    ],
   },
   makers: [
     {
@@ -17,36 +30,9 @@ module.exports = {
       name: '@electron-forge/maker-deb',
       platforms: ['linux'],
     },
-
     {
       name: '@electron-forge/maker-rpm',
       platforms: ['linux'],
     },
-  ],
-  plugins: [
-    [
-      '@electron-forge/plugin-webpack',
-      {
-        mainConfig: './webpack/webpack.main.config.js',
-        renderer: {
-          config: './webpack/webpack.renderer.config.js',
-          entryPoints: [
-            {
-              name: 'header',
-              html: './src/renderer/header.html',
-              js: './src/renderer/compositions/header/start.js',
-              preload: {
-                js: './src/renderer/compositions/header/preload.js',
-              },
-            },
-            {
-              name: 'view',
-              html: './src/renderer/view.html',
-              js: './src/renderer/compositions/view/start.js',
-            },
-          ],
-        },
-      },
-    ],
   ],
 };

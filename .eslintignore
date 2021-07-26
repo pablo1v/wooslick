@@ -1,4 +1,3 @@
-node_modules/
-dist/
 out/
-.webpack/
+dist/
+node_modules/

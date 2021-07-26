@@ -107,5 +107,6 @@ dist
 out/
 release/
 
-# Webpack
-.webpack/
+# Project
+maked/
+dist/
