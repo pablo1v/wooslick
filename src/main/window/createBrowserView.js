@@ -23,7 +23,12 @@ export function createBrowserView(name, options = {}) {
   const { fullResizable, bounds, webPreferences = {} } = options;
   const autoResizeOptions = {};
 
-  const browserWindow = new BrowserView({ webPreferences });
+  const browserWindow = new BrowserView({
+    webPreferences: {
+      webSecurity: false,
+      ...webPreferences,
+    },
+  });
 
   if (fullResizable) {
     Object.assign(autoResizeOptions, {

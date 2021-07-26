@@ -1,5 +1,5 @@
-export const VIEW_PAGE_URL = VIEW_WEBPACK_ENTRY;
+export const VIEW_PAGE_FILE = window.manager.getViewPageFile();
+export const VIEW_PAGE_URL = `file://${VIEW_PAGE_FILE}`;
 
-export const CANCEL_ICON_PATH = '/img/cancel.svg';
-
-export const REFRESH_ICON_PATH = '/img/refresh.svg';
+export const CANCEL_ICON = './public/img/cancel.svg';
+export const REFRESH_ICON = './public/img/refresh.svg';

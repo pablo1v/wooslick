@@ -1,7 +1,10 @@
+import { resolve } from 'path';
+
 import * as remote from '@electron/remote';
 import { contextBridge } from 'electron';
 
-const manager = {
+export const manager = {
+  getViewPageFile: () => resolve(__dirname, '..', 'view.html'),
   setWindowTitle: title => {
     remote.getCurrentWindow().setTitle(title);
   },

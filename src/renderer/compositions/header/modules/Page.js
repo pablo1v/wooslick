@@ -1,6 +1,6 @@
 import { AppName } from '../../../../../config/app';
 import { ElementManager } from '../managers/ElementManager';
-import { isInIdlePage } from '../utils/isInIdlePage';
+import { isIdlePage } from '../utils/isIdlePage';
 import { Take } from './Take';
 
 export class Page extends Take {
@@ -31,7 +31,7 @@ export class Page extends Take {
       let url = contentWebContents.getURL();
       let title = contentWebContents.getTitle();
 
-      if (isInIdlePage(url)) {
+      if (isIdlePage(url)) {
         url = '';
         title = AppName;
       }

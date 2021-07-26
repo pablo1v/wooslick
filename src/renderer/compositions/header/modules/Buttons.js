@@ -1,10 +1,6 @@
-import {
-  VIEW_PAGE_URL,
-  CANCEL_ICON_PATH,
-  REFRESH_ICON_PATH,
-} from '../constants';
+import { VIEW_PAGE_URL, CANCEL_ICON, REFRESH_ICON } from '../constants';
 import { ElementManager } from '../managers/ElementManager';
-import { isInIdlePage } from '../utils/isInIdlePage';
+import { isIdlePage } from '../utils/isIdlePage';
 import { Take } from './Take';
 
 export class Buttons extends Take {
@@ -60,7 +56,7 @@ export class Buttons extends Take {
         return;
       }
 
-      if (isInIdlePage(contentWebContents.getURL())) {
+      if (isIdlePage(contentWebContents.getURL())) {
         contentWebContents.goToIndex(0);
         return;
       }
@@ -71,14 +67,15 @@ export class Buttons extends Take {
     /* */
 
     const handleLoadEffects = (force = false) => {
-      if (force && isInIdlePage(this.lastPageURL)) {
+      if (force && isIdlePage(this.lastPageURL)) {
         nextButton.setAttribute('disabled', true);
         return;
       }
 
       if (
-        isInIdlePage(contentWebContents.getURL()) ||
-        (contentWebContents.canGoForward() && !isInIdlePage(this.lastPageURL))
+        (isIdlePage(contentWebContents.getURL()) &&
+          contentWebContents.canGoForward()) ||
+        (contentWebContents.canGoForward() && !isIdlePage(this.lastPageURL))
       ) {
         nextButton.removeAttribute('disabled');
         return;
@@ -133,7 +130,7 @@ export class Buttons extends Take {
       'content',
       'did-stop-loading',
       () => {
-        if (isInIdlePage(contentWebContents.getURL())) {
+        if (isIdlePage(contentWebContents.getURL())) {
           previousButton.setAttribute('disabled', true);
         }
       },
@@ -157,15 +154,15 @@ export class Buttons extends Take {
       const imageElement = refreshButton.querySelector('img');
 
       if (refreshButton.classList.contains('refreshing')) {
-        imageElement.setAttribute('src', CANCEL_ICON_PATH);
+        imageElement.setAttribute('src', CANCEL_ICON);
         return;
       }
 
-      if (imageElement.getAttribute('src') === REFRESH_ICON_PATH) {
+      if (imageElement.getAttribute('src') === REFRESH_ICON) {
         return;
       }
 
-      imageElement.setAttribute('src', REFRESH_ICON_PATH);
+      imageElement.setAttribute('src', REFRESH_ICON);
     });
 
     mutationObserver.observe(refreshButton, {
@@ -177,7 +174,7 @@ export class Buttons extends Take {
     /* */
 
     refreshButton.addEventListener('click', () => {
-      if (isInIdlePage(contentWebContents.getURL())) {
+      if (isIdlePage(contentWebContents.getURL())) {
         return;
       }
 
