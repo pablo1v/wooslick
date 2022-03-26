@@ -1272,10 +1272,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@hitechline/eslint-config@2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@hitechline/eslint-config/-/eslint-config-2.0.2.tgz#0f5bcbad0a7f63f9bfffeaa0fbb56070f9e0543a"
-  integrity sha512-y/i9kMTQ1pJoU+EaR7MKsAENgfBnbrMK16SiSs/Ymqxsyp52lUbwDXFWF0DSWM4HAz6kfABDNE2fSOmLe8GCQQ==
+"@hitechline/eslint-config@2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@hitechline/eslint-config/-/eslint-config-2.0.3.tgz#17962c8031997003bd38c497bfc6eb65a5b6e797"
+  integrity sha512-qiHbzMGl2TENe1kyntAYwJKH1sDxcEWIWSGUxhXt5AjWUQGp8RAkXZ0mFa+9BgPfHf2Dj3QjsWCFGlhRd8ww/A==
 
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
