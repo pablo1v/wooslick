@@ -1288,10 +1288,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@hitechline/eslint-config@2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@hitechline/eslint-config/-/eslint-config-2.0.3.tgz#17962c8031997003bd38c497bfc6eb65a5b6e797"
-  integrity sha512-qiHbzMGl2TENe1kyntAYwJKH1sDxcEWIWSGUxhXt5AjWUQGp8RAkXZ0mFa+9BgPfHf2Dj3QjsWCFGlhRd8ww/A==
+"@hitechline/eslint-config@2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@hitechline/eslint-config/-/eslint-config-2.0.4.tgz#0b74eddb3168d1760755d3844f0f2b777309e7bf"
+  integrity sha512-toVl0nZry5EOLNXIbAYj06+2SaXx5+L3QsSuG6w9lAez3ikbmWwBJS0iWI6B7SzFv8CLAqNSxxJ0qGkfGm4OKw==
 
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
