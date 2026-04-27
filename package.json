@@ -50,7 +50,7 @@
     "chalk": "^4.1.1",
     "chokidar": "^3.5.2",
     "electron": "18.3.7",
-    "esbuild": "^0.12.15",
+    "esbuild": "^0.25.0",
     "eslint": "7.32.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-airbnb-base": "14.2.1",
